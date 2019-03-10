@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>UI Components</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/ui-component.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <script src="js/component/ui-core/ui-core.js"></script>
+    <script src="js/component/ui-nav/ui-nav.js"></script>
+    <script src="js/component/ui-container/ui-container.js"></script>
+    <script src="js/component/ui-row/ui-row.js"></script>
+    <script src="js/component/ui-col/ui-col.js"></script>
+    <script src="js/component/ui-code/ui-code.js"></script>
+    <script src="js/component/ui-markdown-preview/ui-markdown-preview.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <ui-nav>
+        <span class="brand">UI Components</span>
+    </ui-nav>
+    <ui-core></ui-core>
+    <ui-container>
+        <ui-row>
+            <ui-col type="sx-3" class="side-panel">
+                <ul>
+                    <li>
+                        <a href="#layout">Layout</a>
+                        <ul>
+                            <li>
+                                <a href="#container">Container</a>
+                            </li>
+                            <li>
+                                <a href="#grid">Grid</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                            <a href="#component">Component</a>
+                            <ul>
+                                <li>
+                                    <a href="#markdown">Markdown Preview</a>
+                                </li>
+                                <li>
+                                    <a href="#code">Code Block</a>
+                                </li>
+                            </ul>
+                    </li>
+                </ul>
+            </ui-col>
+        <ui-col type="sx-9">
+            <ui-markdown-preview name="layout">
+# <a name="layout"></a>Layout  
+Compoents to set page the layout.
+## <a name="container"></a>Container  
+Basic component for a flexiable container
+            </ui-markdown-preview>
+            <ui-code>
+                <xmp>
+                    <script src="js/component/ui-container/ui-container.js"></script>
+                    <ui-container>
+                        ...you content
+                    </ui-container>
+                </xmp>
+            </ui-code>
+            <ui-markdown-preview>
+## <a name="grid"></a>Grid
+Rows and columns
+### Row
+Create a row
+            </ui-markdown-preview>
+            <ui-code>
+                <xmp>
+                    <script src="js/component/ui-row/ui-row.js"></script>
+                    <ui-row>
+                        ...content here
+                    </ui-row>
+                </xmp>
+            </ui-code>
+            <ui-markdown-preview>
+### Columns  
+Create a column
+            </ui-markdown-preview>
+            <ui-code>
+                <xmp>
+                    <script src="js/component/ui-row/ui-row.js"></script>
+                    <script src="js/component/ui-col/ui-col.js"></script>
+                    <ui-row>
+                        <ui-col></ui-col>
+                        <ui-col></ui-col>
+                    </ui-row>
+                </xmp>
+            </ui-code>
+            <ui-markdown-preview>
+#### Columns Sizes
+`type="sx-3"`  
+`type="sx-9"` 
+            </ui-markdown-preview>
+            <ui-code>
+                <xmp>
+                    <script src="js/component/ui-row/ui-row.js"></script>
+                    <script src="js/component/ui-col/ui-col.js"></script>
+                    <ui-row>
+                        <ui-col type="sx-3"></ui-col>
+                        <ui-col type="sx-9"></ui-col>
+                    </ui-row>
+                </xmp>
+            </ui-code>
+            <ui-markdown-preview>
+# <a name="component"></a>Component
+Here's components which are built as `custom elements`
+
+## <a name="markdown"></a>Markdown Preview
+This component convert the content within its tags to `HTML`.
+
+The following markdown syntax's are available:
+- `headings`
+- `bold|italic`
+- `block quote`
+- `inline code`
+- `list`
+
+You can also pass in markdown via the `markdown` attribute.
+            </ui-markdown-preview>
+            <ui-code>
+                <xmp>
+                    <script src="js/component/ui-row/ui-markdown-preview.js"></script>
+                    <ui-markdow-preview>
+                    # Title
+                    </ui-markdow-preview>
+                    <ui-markdow-preview markdown="# hello world">
+                    </ui-markdow-preview>
+                </xmp>
+            </ui-code>
+            <ui-markdown-preview>
+## <a name="code"></a>Code Block
+This component highlights syntax for `html|css|js` when provided within its tag.e
+Ensure you wrap the code with either `&#x3C;pre&#x3E;&#x3C;code&#x3E;&#x3C;/code&#x3E;&#x3C;/pre&#x3E;` or `&#x3C;xmp&#x3E;&#x3C;/xmp&#x3E;` for `HTML`.            
+            </ui-markdown-preview>
+            <ui-code>
+                <pre>
+                    <code>
+                       class Example {
+                           constructor(){
+                               this.title = "hello world";
+                           }
+                       }
+                    </code>
+                </pre>
+            </ui-code>
+            <ui-code>
+                <xmp>
+                    <body>
+                        <ui-core></ui-core>
+                        <ui-container>
+                            <ui-code>
+                                </ui-code>
+                        </ui-container>
+                    </body>
+                </xmp>
+            </ui-code>
+            <ui-code>
+                <pre>
+                    <code>
+                        .container {
+                            background-color: red;
+                        }
+                    </code>
+                </pre>
+            </ui-code>
+            </ui-col>
+        </ui-row>
+    </ui-container>
+</body>
+</html>

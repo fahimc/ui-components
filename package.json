@@ -1,0 +1,37 @@
+{
+  "name": "ui-components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean:dist": "cleandir \"dist\"",
+    "build": "tsc",
+    "serve": "browser-sync start -s \"example\" -f \"dist\" --ss \"dist\"",
+    "sass": "node-sass src/style/main.scss dist/css/ui-component.css",
+    "watch-serve": "run-p serve watch:*",
+    "watch:tsc": "tsc --watch",
+    "watch:scss": "onchange \"src/**/*.scss\" -- run-s sass",
+    "watch": "run-s clean:dist sass watch-serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fahimc/ui-components.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fahimc/ui-components/issues"
+  },
+  "homepage": "https://github.com/fahimc/ui-components#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "clean-dir": "^1.0.3",
+    "node-sass": "^4.11.0",
+    "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5",
+    "onchange": "^5.2.0",
+    "redux": "^4.0.1"
+  }
+}
