@@ -37,6 +37,8 @@ class UIRow extends HTMLElement {
                 flex-direction: row;
                 justify-content: space-between;
                 width:100%;
+                height: 100%;
+                box-sizing: border-box;
              }
              ::slotted(ui-col) {
                  flex:1;
