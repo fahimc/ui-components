@@ -15,6 +15,7 @@ class UICol extends HTMLElement {
         shadow.appendChild(this.element);
 
         this.styleElement.innerHTML = this.getStyle();
+        this.element.classList.add('wrapper');
         this.element.innerHTML = this.getTemplate();
     }
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -34,7 +35,14 @@ class UICol extends HTMLElement {
                 justify-content: flex-start;
                 box-sizing: border-box;
                 height:100%;
-               
+                padding:20px;
+            }
+            .wrapper{
+                width:100%;
+                height:100%;
+            }
+            .wrapper slot {
+                flex:1;
             }
             @media(min-width: 815px) {
                 :host([type="sx-3"]) {

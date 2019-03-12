@@ -15,6 +15,7 @@ class UIRow extends HTMLElement {
         shadow.appendChild(this.element);
 
         this.styleElement.innerHTML = this.getStyle();
+        this.element.classList.add('wrapper');
         this.element.innerHTML = this.getTemplate();
     }
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -30,11 +31,26 @@ class UIRow extends HTMLElement {
                 flex: 1;
                 flex-direction: row;
                 flex-wrap: wrap;
-               justify-content: space-between;
             }
-            ::slotted(ui-col:last-child){
-                margin-left:-15px;
-                padding-left:15px;
+             .wrapper slot {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width:100%;
+             }
+             ::slotted(ui-col) {
+                 flex:1;
+             }
+            .wrapper{
+                width:100%;
+                height:100%;
+                flex:1;
+                display:flex;
+            }
+            @media(max-width: 815px) {
+                .wrapper slot {
+                    flex-direction: column;
+                }
             }
             `;
     }

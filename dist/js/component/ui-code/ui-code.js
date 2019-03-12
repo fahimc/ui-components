@@ -59,9 +59,10 @@ class UICode extends HTMLElement {
                 color:var(--color-secondary,white);
                 background-color:var(--bg-color-secondary,#0D0A0B);
                 padding:20px;
-                margin:20px;
+                margin:20px 0;
                 width:100%;
                 display:block;
+                box-sizing: border-box;
             } 
             .ui-code-wrapper .type, .ui-code-wrapper .tag {
                  color:var(--code-blue,#63BFDB);

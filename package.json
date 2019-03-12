@@ -6,7 +6,7 @@
   "scripts": {
     "clean:dist": "cleandir \"dist\"",
     "build": "tsc",
-    "serve": "browser-sync start -s \"example\" -f \"dist\" --ss \"dist\"",
+    "serve": "browser-sync start -s \"example\" -f \"example\" --ss \"dist\"",
     "sass": "node-sass src/style/main.scss dist/css/ui-component.css",
     "watch-serve": "run-p serve watch:*",
     "watch:tsc": "tsc --watch",
