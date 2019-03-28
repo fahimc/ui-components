@@ -36,7 +36,7 @@ class UICode extends HTMLElement {
         content = content.replace(/(const |var |let |this\.|private |public |class | get | set | extends |super)/igm, '<span class="type">$1</span>');
         content = content.replace(/([a-zA-z]+)\(/igm, '<span class="method">$1</span>(');
         content = content.replace(/(^(?!\.)[a-zA-z]+)\./igm, '<span class="object">$1</span>.');
-        content = content.replace(/([a-zA-z\-]+)\:/igm, '<span class="css-prop">$1</span>:');
+        content = content.replace(/([a-zA-z\-\(\)]+)\:/igm, '<span class="css-prop">$1</span>:');
         content = content.trim().replace(/\n|\r|\n\r/igm, '<br/>');
         content = content.replace(/(&#x3C;script)(.*?)(&#x3E;)/igm, '<span class="method">$1</span><span class="string">$2</span><span class="method">$3</span>');
         content = content.replace(/(&#x3C;\/script&#x3E;)/igm, '<span class="method">$1</span>');
