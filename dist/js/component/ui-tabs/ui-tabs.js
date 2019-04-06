@@ -36,7 +36,7 @@ class UITabs extends HTMLElement {
                 white-space: nowrap;
             }
             .wrapper::-webkit-scrollbar {
-                width:var(--tab-scrollbar-width,0.5em);
+                width:var(--tab-scrollbar-width,0.5rem);
             }
             .wrapper::-webkit-scrollbar-thumb {
                 border-top: 1px solid black;
@@ -55,6 +55,9 @@ class UITabs extends HTMLElement {
                 box-sizing: border-box;
                 position: relative;
                 cursor:pointer;
+                max-width: var(--tab-max-width, 6rem);
+                text-overflow: ellipsis;
+                overflow:hidden;
             }
             .tab.active .close, .tab:hover .close{
                 display:inline-block;
@@ -82,9 +85,7 @@ class UITabs extends HTMLElement {
         return template;
     }
     getTemplate() {
-        return `
-            ${this.getTabElements()}
-        `;
+        return `${this.getTabElements()}`;
     }
     onTabClicked(event) {
         const id = event.currentTarget.getAttribute('tab-id');

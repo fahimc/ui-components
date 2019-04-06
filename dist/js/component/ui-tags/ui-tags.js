@@ -1,7 +1,4 @@
 class UITags extends HTMLElement {
-    static get observedAttributes() {
-        return ['tags'];
-    }
     constructor() {
         super();
         this.element = document.createElement('div');
@@ -9,6 +6,9 @@ class UITags extends HTMLElement {
         this.styleElement.innerHTML = this.getStyle();
         this.tags = [];
         this.element.innerHTML = this.getTemplate();
+    }
+    static get observedAttributes() {
+        return ['tags'];
     }
     connectedCallback() {
         const shadow = this.attachShadow({ mode: 'open' });
@@ -38,13 +38,21 @@ class UITags extends HTMLElement {
             display: inline-block;
             margin-right: var(--tag-margin-right,0.2rem);
             font-size: var(--tag-font-size,0.75rem);
+            cursor:pointer;
+        }
+        .tag:not(.active):hover {
+            background-color: var(--tag-hover-bg-color,#666);
+        }
+        .tag.active {
+            background-color: var(--tag-active-bg-color,#333);
+            color: var(--tag-active-color,white);
         }
             `;
     }
     getTags() {
         let template = ``;
         this.tags.forEach((tag, index) => {
-            template += `<div class="tag" tag-id="${index}">${tag.name}</div>`;
+            template += `<div class="tag ${tag.active ? 'active' : ''}" tag-id="${index}">${tag.name}</div>`;
         });
         return template;
     }
@@ -53,9 +61,26 @@ class UITags extends HTMLElement {
         ${this.getTags()}
         `;
     }
+    onTagClicked(event) {
+        const id = event.currentTarget.getAttribute('tag-id');
+        let detail = {
+            tabData: this.tags[Number(id)],
+            eventType: event.srcElement.classList.contains('close') ? 'close' : 'active',
+        };
+        const e = new CustomEvent(UITags.EVENT.ON_TAG_CHANGE, {
+            detail,
+        });
+        this.dispatchEvent(e);
+    }
     render() {
         this.element.innerHTML = this.getTemplate();
+        this.element.querySelectorAll('.tag').forEach((element) => {
+            element.addEventListener('click', this.onTagClicked.bind(this));
+        });
     }
 }
+UITags.EVENT = {
+    ON_TAG_CHANGE: 'ON_TAG_CHANGE',
+};
 customElements.define('ui-tags', UITags);
 //# sourceMappingURL=ui-tags.js.map

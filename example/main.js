@@ -5,6 +5,33 @@ const Main = {
     onLoad(){
         this.tabExample();
         this.tagsExample();
+        this.typeaheadExample();
+        
+    },
+    typeaheadExample(){
+        const tags = document.querySelectorAll('ui-typeahead');
+        let tagCollecton = [
+        ];
+        for(let a=0; a < 20; ++a){
+            tagCollecton.push({
+                active: a == 0 ? true : false,
+                label: `pill ${a + 1}`,
+                id: a,
+            });
+        }
+        tags.forEach(tag => tag.setAttribute('option-list',JSON.stringify(tagCollecton)));
+
+        const customEvent = new CustomEvent('OPEN_MENU',{
+            detail:{
+                items: tagCollecton,
+            }
+        });
+
+        document.body.addEventListener('contextmenu',(event)=>{
+            event.stopPropagation();
+            event.preventDefault();
+            document.body.dispatchEvent(customEvent);
+        });
         
     },
     tagsExample(){
@@ -19,6 +46,21 @@ const Main = {
             });
         }
         tags.setAttribute('tags',JSON.stringify(tagCollecton));
+        
+        let currentActiveIndex = 0;
+
+        tags.addEventListener(UITags.EVENT.ON_TAG_CHANGE, (event)=>{
+            console.log('tag clicked', event.detail);
+            tagCollecton.forEach((item , index) =>{
+                if(item.id == event.detail.tabData.id) {
+                    tagCollecton[currentActiveIndex].active = false;
+                    item.active = true;
+                    currentActiveIndex = index;
+                }
+                
+            });
+            tags.setAttribute('tags',JSON.stringify(tagCollecton));
+        });
 
     },
     tabExample(){
