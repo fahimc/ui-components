@@ -1,69 +1,50 @@
-class UICol extends HTMLElement {
-    static get observedAttributes() {
-        return [];
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var UICol = (function (_super) {
+    __extends(UICol, _super);
+    function UICol() {
+        var _this = _super.call(this) || this;
+        _this.element = document.createElement('div');
+        _this.styleElement = document.createElement('style');
+        return _this;
     }
-    constructor() {
-        super();
-        this.element = document.createElement('div');
-        this.styleElement = document.createElement('style');
-    }
-    connectedCallback() {
-        const shadow = this.attachShadow({ mode: 'open' });
+    Object.defineProperty(UICol, "observedAttributes", {
+        get: function () {
+            return [];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    UICol.prototype.connectedCallback = function () {
+        var shadow = this.attachShadow({ mode: 'open' });
         shadow.appendChild(this.styleElement);
         shadow.appendChild(this.element);
         this.styleElement.innerHTML = this.getStyle();
         this.element.classList.add('wrapper');
         this.element.innerHTML = this.getTemplate();
-    }
-    attributeChangedCallback(name, oldValue, newValue) {
+    };
+    UICol.prototype.attributeChangedCallback = function (name, oldValue, newValue) {
         switch (name) {
         }
-    }
-    getStyle() {
-        return `
-            @import '${window['UI_COMPONENT_STYLE_PATH'] ? window['UI_COMPONENT_STYLE_PATH'] : 'css/ui-component.css'}';
-            :host{
-                box-sizing: border-box;
-                flex: 1;
-                vertical-align:top;
-                display:inline-block;
-                max-width:100%;
-                width:100%;
-                justify-content: flex-start;
-                box-sizing: border-box;
-                height:100%;
-                padding:20px;
-            }
-            .wrapper{
-                width:100%;
-                height:100%;
-            }
-            .wrapper slot {
-                flex:1;
-            }
-            @media(min-width: 815px) {
-                :host([type="sx-3"]) {
-                    flex-basis: 25%;
-                    max-width: 25%;
-                }
-                :host([type="sx-9"]) {
-                    flex-basis: 75%;
-                    max-width: 75%;
-                }
-            }
-            @media(max-width: 815px) {
-            :host {
-                flex-basis: 100%;
-                height:auto;
-            }
-            }
-            `;
-    }
-    getTemplate() {
-        return `
-            <slot></slot>
-        `;
-    }
-}
+    };
+    UICol.prototype.getStyle = function () {
+        return "\n            @import '" + (window['UI_COMPONENT_STYLE_PATH'] ? window['UI_COMPONENT_STYLE_PATH'] : 'css/ui-component.css') + "';\n            :host{\n                box-sizing: border-box;\n                flex: 1;\n                vertical-align:top;\n                display:inline-block;\n                max-width:100%;\n                width:100%;\n                justify-content: flex-start;\n                box-sizing: border-box;\n                height:100%;\n                padding:20px;\n            }\n            .wrapper{\n                width:100%;\n                height:100%;\n            }\n            .wrapper slot {\n                flex:1;\n            }\n            @media(min-width: 815px) {\n                :host([type=\"sx-3\"]) {\n                    flex-basis: 25%;\n                    max-width: 25%;\n                }\n                :host([type=\"sx-9\"]) {\n                    flex-basis: 75%;\n                    max-width: 75%;\n                }\n            }\n            @media(max-width: 815px) {\n            :host {\n                flex-basis: 100%;\n                height:auto;\n            }\n            }\n            ";
+    };
+    UICol.prototype.getTemplate = function () {
+        return "\n            <slot></slot>\n        ";
+    };
+    return UICol;
+}(HTMLElement));
 customElements.define('ui-col', UICol);
 //# sourceMappingURL=ui-col.js.map

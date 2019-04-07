@@ -1,4 +1,4 @@
-const Main = {
+var Main = {
     init(){
         document.addEventListener('DOMContentLoaded', this.onLoad.bind(this));
     },
@@ -9,36 +9,42 @@ const Main = {
         
     },
     typeaheadExample(){
-        const tags = document.querySelectorAll('ui-typeahead');
-        let tagCollecton = [
+        var typeahead = document.querySelectorAll('ui-typeahead');
+        var typeaheadOptions = [
         ];
-        for(let a=0; a < 20; ++a){
-            tagCollecton.push({
+        for(var a=0; a < 20; ++a){
+            typeaheadOptions.push({
                 active: a == 0 ? true : false,
-                label: `pill ${a + 1}`,
+                label: `${this.createRandomWord(Math.floor(Math.random() * 6) + 4)} ${a + 1}`,
                 id: a,
             });
         }
-        tags.forEach(tag => tag.setAttribute('option-list',JSON.stringify(tagCollecton)));
+        typeahead.forEach(item => {
+            item.setAttribute('option-list',JSON.stringify(typeaheadOptions))
 
-        const customEvent = new CustomEvent('OPEN_MENU',{
+            item.addEventListener('TYPEAHEAD_ON_CHANGE', (event)=>{
+                console.log('TYPEAHEAD_ON_CHANGE', event);
+            }); 
+        });
+
+        var customEvent = new CustomEvent('OPEN_MENU',{
             detail:{
-                items: tagCollecton,
+                items: typeaheadOptions,
             }
         });
 
-        document.body.addEventListener('contextmenu',(event)=>{
-            event.stopPropagation();
-            event.preventDefault();
-            document.body.dispatchEvent(customEvent);
-        });
+        // document.body.addEventListener('contextmenu',(event)=>{
+        //     event.stopPropagation();
+        //     event.preventDefault();
+        //     document.body.dispatchEvent(customEvent);
+        // });
         
     },
     tagsExample(){
-        const tags = document.querySelector('ui-tags');
-        let tagCollecton = [
+        var tags = document.querySelector('ui-tags');
+        var tagCollecton = [
         ];
-        for(let a=0; a < 20; ++a){
+        for(var a=0; a < 20; ++a){
             tagCollecton.push({
                 active: a == 0 ? true : false,
                 name: `tag ${a + 1}`,
@@ -47,7 +53,7 @@ const Main = {
         }
         tags.setAttribute('tags',JSON.stringify(tagCollecton));
         
-        let currentActiveIndex = 0;
+        var currentActiveIndex = 0;
 
         tags.addEventListener(UITags.EVENT.ON_TAG_CHANGE, (event)=>{
             console.log('tag clicked', event.detail);
@@ -64,11 +70,11 @@ const Main = {
 
     },
     tabExample(){
-        const tabs = document.querySelector('ui-tabs');
-        let currentActiveIndex = 0;
-        let tabCollecton = [
+        var tabs = document.querySelector('ui-tabs');
+        var currentActiveIndex = 0;
+        var tabCollecton = [
         ];
-        for(let a=0; a < 20; ++a){
+        for(var a=0; a < 20; ++a){
             tabCollecton.push({
                 active: a == 0 ? true : false,
                 name: `tab ${a + 1}`,
@@ -101,5 +107,22 @@ const Main = {
             tabs.setAttribute('tabs',JSON.stringify(tabCollecton));
 
         });
+    },
+    createRandomWord(length) {
+        var consonants = 'bcdfghjlmnpqrstv',
+            vowels = 'aeiou',
+            rand = function(limit) {
+                return Math.floor(Math.random()*limit);
+            },
+            i, word='', length = parseInt(length,10),
+            consonants = consonants.split(''),
+            vowels = vowels.split('');
+        for (i=0;i<length/2;i++) {
+            var randConsonant = consonants[rand(consonants.length)],
+                randVowel = vowels[rand(vowels.length)];
+            word += (i===0) ? randConsonant.toUpperCase() : randConsonant;
+            word += i*2<length-1 ? randVowel : '';
+        }
+        return word;
     }
 }.init();

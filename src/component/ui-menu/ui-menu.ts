@@ -167,10 +167,12 @@ class MenuComponent {
         return `
             #${MenuComponent.MENU_ID} {
                 position:absolute;
+                padding: 10px;
                 padding: var(--ui-menu-padding, 10px);
                 border: 1px solid #333;
                 display:none;
                 box-sizing: border-box;
+                background-color:white;
                 background-color:var(--ui-menu-bg-color, white);
                 z-index:99999;
                 overflow:auto;
